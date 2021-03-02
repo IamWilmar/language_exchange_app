@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:language_exchange_app/models/usuario_model.dart';
+import 'package:language_exchange_app/pages/messages_list.dart';
 
 class ProfilePage extends StatelessWidget {
   final Usuario user;
@@ -17,13 +18,16 @@ class ProfilePage extends StatelessWidget {
             floating: true,
             expandedHeight: 500,
             flexibleSpace: FlexibleSpaceBar(
-              background: FadeInImage(
-                fit: BoxFit.cover,
-                placeholder: AssetImage('assets/paperbag.png'),
-                fadeInDuration: Duration(seconds: 10),
-                image: (user.photo.length > 4)
-                    ? NetworkImage(user.photo)
-                    : AssetImage('assets/paperbag.png'),
+              background: Hero(
+                tag: "${user.uid}",
+                child: FadeInImage(
+                  fit: BoxFit.cover,
+                  placeholder: AssetImage('assets/paperbag.png'),
+                  fadeInDuration: Duration(seconds: 10),
+                  image: (user.photo.length > 4)
+                      ? NetworkImage(user.photo)
+                      : AssetImage('assets/paperbag.png'),
+                ),
               ),
             ),
           ),
@@ -35,6 +39,16 @@ class ProfilePage extends StatelessWidget {
             ]),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.mail_outline_rounded),
+        label: Text('Send Letter', style: TextStyle(fontSize: 15)),
+        backgroundColor: Color(0xFF592252),
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => MessagesListPage(user: user),
+          ));
+        },
       ),
     );
   }
@@ -101,22 +115,10 @@ class UserBio extends StatelessWidget {
         children: [
           Text('Bio', style: bioTitleStyle),
           SizedBox(height: 30),
-          Text(user.biography, style: bioTextStyle, textAlign: TextAlign.justify),
+          Text(user.biography,
+              style: bioTextStyle, textAlign: TextAlign.justify),
         ],
       ),
-    );
-  }
-}
-
-class _Boxes extends StatelessWidget {
-  final color;
-  const _Boxes(this.color);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 10,
-      height: 100,
-      color: color,
     );
   }
 }

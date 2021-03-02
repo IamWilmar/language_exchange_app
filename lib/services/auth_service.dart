@@ -83,7 +83,8 @@ class AuthService with ChangeNotifier {
   //SI token todavia es valido, Renueva el token
   Future<bool> isLoggedIn() async {
     final token = await this._storage.read(key: 'token');
-    final resp = await http.get(
+    try{
+       final resp = await http.get(
       '${Enviroment.apiUrl}/login/renew',
       headers: {'Content-Type': 'application/json', 'x-token': token}
     );
@@ -94,6 +95,9 @@ class AuthService with ChangeNotifier {
       return true;
     }else{
       this.logout();
+      return false;
+    }
+    }catch(error){
       return false;
     }
   }

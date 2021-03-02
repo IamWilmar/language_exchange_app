@@ -3,7 +3,6 @@ import 'package:language_exchange_app/animations/page_transitions.dart';
 import 'package:language_exchange_app/pages/loading_page.dart';
 import 'package:language_exchange_app/pages/my_profile_page.dart';
 import 'package:language_exchange_app/pages/profile_page.dart';
-import 'package:language_exchange_app/providers/edit_user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:language_exchange_app/models/usuario_model.dart';
 import 'package:language_exchange_app/services/auth_service.dart';
@@ -27,11 +26,17 @@ class _UsersPageState extends State<UsersPage> {
   }
 
   @override
+  void dispose() { 
+    _refreshController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(authService.usuario.nombre,
+        title: Text(authService.usuario.learnLanguage,
             style: TextStyle(color: Colors.black54)),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -93,7 +98,7 @@ class ProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final editUser = Provider.of<EditUser>(context);
+    final cacheUser = Provider.of<AuthService>(context);
     return InkWell(
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
@@ -110,8 +115,8 @@ class ProfileButton extends StatelessWidget {
         ),
       ),
       onTap: () {
-        editUser.user = authService.usuario;
-        Navigator.of(context).push(goToPage(MyProfilePage()));
+        print(cacheUser.usuario.learnLanguage);
+        Navigator.of(context).push(goToPage(MyProfilePage(cacheUser: cacheUser.usuario)));
       },
     );
   }
@@ -152,14 +157,17 @@ class UserTile extends StatelessWidget {
       child: Container(
         height: 200,
         color: Colors.grey[400],
-        child: FadeInImage(
-          placeholder: AssetImage('assets/paperbag.png'),
-          height: 200,
-          fit: BoxFit.cover,
-          fadeInDuration: Duration(milliseconds: 200),
-          image: user.photo.length > 4
-              ? NetworkImage(user.photo)
-              : AssetImage('assets/paperbag.png'),
+        child: Hero(
+          tag: "${user.uid}",
+          child: FadeInImage(
+            placeholder: AssetImage('assets/paperbag.png'),
+            height: 200,
+            fit: BoxFit.cover,
+            fadeInDuration: Duration(milliseconds: 200),
+            image: user.photo.length > 4
+                ? NetworkImage(user.photo)
+                : AssetImage('assets/paperbag.png'),
+          ),
         ),
       ),
     );
