@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:language_exchange_app/pages/contacts_page.dart';
+import 'package:language_exchange_app/pages/home_page.dart';
 import 'package:language_exchange_app/pages/loading_page.dart';
 import 'package:language_exchange_app/pages/login_page.dart';
 import 'package:language_exchange_app/pages/messages_list.dart';
@@ -19,4 +21,6 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'messagesList'  : (_) => MessagesListPage(),
   'readPage'      : (_) => ReadLetterPage(),
   'writePage'     : (_) => WriteLetterPage(),
+  'homePage'      : (_) => HomePage(),
+  'contactPage'   : (_) => ContactPage(),
 };

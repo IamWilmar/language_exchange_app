@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:language_exchange_app/animations/page_transitions.dart';
+import 'package:language_exchange_app/pages/home_page.dart';
 import 'package:language_exchange_app/pages/login_page.dart';
-import 'package:language_exchange_app/pages/users_page.dart';
 import 'package:language_exchange_app/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,7 @@ class LoadingPage extends StatelessWidget {
     if (autenticado) {
       Navigator.pushReplacement(
         context,
-        goToPage(UsersPage()),
+        goToPage(HomePage()),
       );
     } else {
       Navigator.pushReplacement(

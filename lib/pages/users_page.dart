@@ -14,7 +14,7 @@ class UsersPage extends StatefulWidget {
   _UsersPageState createState() => _UsersPageState();
 }
 
-class _UsersPageState extends State<UsersPage> {
+class _UsersPageState extends State<UsersPage>  with AutomaticKeepAliveClientMixin{
   final usuariosService = UsuariosService();
   List<Usuario> usuarios = [];
   RefreshController _refreshController =
@@ -33,6 +33,7 @@ class _UsersPageState extends State<UsersPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
@@ -72,6 +73,7 @@ class _UsersPageState extends State<UsersPage> {
   //se encuentra en refresher
   Widget _userList() {
     return ListView.separated(
+      padding: EdgeInsets.only(bottom: kToolbarHeight),
       physics: BouncingScrollPhysics(),
       itemCount: this.usuarios.length,
       itemBuilder: (_, i) => UserTile(user: this.usuarios[i]),
@@ -86,6 +88,10 @@ class _UsersPageState extends State<UsersPage> {
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 class ProfileButton extends StatelessWidget {

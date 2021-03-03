@@ -63,6 +63,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
               //CustomDivider(),
               //UserBio(),
               _applyChangesButton(),
+              SizedBox(
+                height: kToolbarHeight,
+              ),
             ]),
           ),
         ],
