@@ -7,6 +7,7 @@ class ReadLetterPage extends StatelessWidget {
     final Mensaje mensaje = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF592252),
         title: Text(mensaje.titulo),
       ),
       body: Padding(

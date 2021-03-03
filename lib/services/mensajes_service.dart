@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:language_exchange_app/global/enviroment.dart';
 import 'package:language_exchange_app/models/mensajes_response.dart';
@@ -21,21 +23,24 @@ class MensajesService {
     }
   }
 
-  Future<bool> sendMessage(Mensaje message) async {
-    final mensaje = message.toJson();
+  Future<void> sendMessage(Mensaje message) async {
     try {
       final resp = await http.post(
         '${Enviroment.apiUrl}/mensajes/new',
-        body: mensaje,
+        body: (jsonEncode({
+          'de': message.de,
+          'para': message.para,
+          'titulo': message.titulo,
+          'carta': message.carta
+        })),
         headers: ({
           'Content-Type': 'application/json',
           'x-token': await AuthService.getToken()
         }),
       );
       print(resp.body);
-      return true;
     } catch (error) {
-      return false;
+      print('error');
     }
   }
 }

@@ -61,7 +61,7 @@ class _MessagesListPageState extends State<MessagesListPage> {
         backgroundColor: Color(0xFF592252),
         child: Icon(Icons.mail_outline_rounded),
         onPressed: (){
-          Navigator.pushNamed(context, 'writePage');
+          Navigator.pushNamed(context, 'writePage', arguments: widget.user);
         },
       ),
     );
