@@ -60,7 +60,7 @@ class _MessagesListPageState extends State<MessagesListPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF592252),
         child: Icon(Icons.mail_outline_rounded),
-        onPressed: (){
+        onPressed: () {
           Navigator.pushNamed(context, 'writePage', arguments: widget.user);
         },
       ),
@@ -72,7 +72,7 @@ class _MessagesListPageState extends State<MessagesListPage> {
       physics: BouncingScrollPhysics(),
       itemCount: this.mensajes.length,
       itemBuilder: (_, i) => MessagesTile(mensaje: this.mensajes[i]),
-      separatorBuilder: (_,i) => Container(
+      separatorBuilder: (_, i) => Container(
         color: Colors.grey.withOpacity(0.2),
         height: 1,
         width: MediaQuery.of(context).size.width,
@@ -103,9 +103,12 @@ class MessagesTile extends StatelessWidget {
         mensaje.carta,
         maxLines: 4,
         overflow: TextOverflow.ellipsis,
-        style: TextStyle(color: ((mensaje.de == authService.usuario.uid) ? Colors.grey.shade400 : Colors.grey)),
+        style: TextStyle(
+            color: ((mensaje.de == authService.usuario.uid)
+                ? Colors.grey.shade400
+                : Colors.grey)),
       ),
-      onTap: (){
+      onTap: () {
         Navigator.pushNamed(context, 'readPage', arguments: mensaje);
       },
     );

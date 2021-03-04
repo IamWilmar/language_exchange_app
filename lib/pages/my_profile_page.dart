@@ -137,8 +137,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   _applyChangesButton() {
     return Container(
-      child: RaisedButton(
-        color: Color(0xFF592252),
+      child: ElevatedButton(
+        // color: Color(0xFF592252),
         child: Text('Apply Change', style: TextStyle(color: Colors.white)),
         onPressed: (editUser.learnLanguage == widget.cacheUser.learnLanguage &&
                 editUser.speakLanguage == widget.cacheUser.speakLanguage)

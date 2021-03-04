@@ -34,15 +34,12 @@ class _UsersPageState extends State<UsersPage>  with AutomaticKeepAliveClientMix
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(authService.usuario.learnLanguage,
-            style: TextStyle(color: Colors.black54)),
+        title: Text('Happy Meeting', style: TextStyle(color: Colors.grey)),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         actionsIconTheme: IconThemeData(color: Colors.black),
-        leading: ProfileButton(authService: authService),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),

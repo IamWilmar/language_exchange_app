@@ -10,10 +10,10 @@ class BlueButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      elevation: 0.0,
-      highlightElevation: 5,
-      color: Colors.black,
+    return ElevatedButton(
+      // elevation: 0.0,
+      // highlightElevation: 5,
+      // color: Colors.black,
       onPressed: this.onPressed,
       child: Center(
         child: Text(
