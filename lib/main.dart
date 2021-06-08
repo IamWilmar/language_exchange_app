@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:language_exchange_app/routes/routes.dart';
 import 'package:language_exchange_app/services/auth_service.dart';
 import 'package:provider/provider.dart';
- 
+
+///Modifacation of git user test
 void main() => runApp(MyApp());
- 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
